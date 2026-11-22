@@ -1,0 +1,6 @@
+{
+  "name": "Monggol Resik",
+  "description": "Media edukasi dan informasi pengelolaan sampah rumah tangga serta Bank Sampah Kalurahan Monggol.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
