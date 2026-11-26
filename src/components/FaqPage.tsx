@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { ArrowRight, ChevronDown, Search, X } from 'lucide-react';
-import { faqItems, type FaqItem, type PageRoute } from '../data/wasteData';
+import { faqItems, type FaqItem, type PageRoute } from '../data/bioporiData';
 
 interface FaqPageProps {
   onNavigate: (page: PageRoute) => void;
@@ -8,10 +8,10 @@ interface FaqPageProps {
 
 const topics: ('Semua' | FaqItem['topic'])[] = [
   'Semua',
-  'Pemilahan',
-  'Persiapan',
-  'Bank Sampah',
-  'Aturan Setor',
+  'Konsep Biopori',
+  'Galon Bekas',
+  'Sampah Organik',
+  'Perawatan & Panen',
 ];
 
 export function FaqPage({ onNavigate }: FaqPageProps) {
@@ -45,11 +45,11 @@ export function FaqPage({ onNavigate }: FaqPageProps) {
           Pertanyaan yang Sering Diajukan
         </p>
         <h1 className="font-display text-3xl sm:text-4xl font-bold text-stone-900 [text-wrap:balance]">
-          FAQ — Pertanyaan Umum Seputar Pemilahan &amp; Bank Sampah
+          FAQ — Pertanyaan Umum Pengelolaan Sampah Organik &amp; Biopori
         </h1>
         <p className="text-base text-stone-600 leading-relaxed">
-          Pilih atau cari pertanyaan di bawah untuk melihat jawaban singkat yang sering ditanyakan
-          warga Kalurahan Monggol.
+          Temukan jawaban praktis seputar biopori, pemanfaatan galon bekas, jenis sampah yang boleh
+          dimasukkan, serta cara merawat dan memanen kompos.
         </p>
       </header>
 
@@ -64,7 +64,7 @@ export function FaqPage({ onNavigate }: FaqPageProps) {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Cari pertanyaan (mis. plastik, dibersihkan, jadwal, nasabah)..."
+            placeholder="Cari pertanyaan (mis. galon, lubang, dipotong, kompos, terurai)..."
             aria-label="Cari pertanyaan FAQ"
             className="w-full pl-10 pr-10 py-2.5 text-sm rounded-lg border border-stone-300 bg-[#FAF9F6] text-stone-900 placeholder:text-stone-400 focus:outline-none focus:border-emerald-800 focus:bg-white transition-colors"
           />
@@ -167,22 +167,22 @@ export function FaqPage({ onNavigate }: FaqPageProps) {
         )}
       </section>
 
-      {/* Contact CTA */}
+      {/* CTA to Tentang Program & QR */}
       <div className="rounded-xl bg-white border border-stone-200 p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="space-y-1">
           <p className="font-display text-lg font-semibold text-stone-900">
-            Pertanyaan Anda belum terjawab?
+            Ingin membagikan panduan ini lewat poster atau papan informasi?
           </p>
           <p className="text-sm text-stone-600">
-            Hubungi langsung pengelola Bank Sampah Kalurahan Monggol atau akses QR Code website.
+            Lihat informasi program KKN serta unduh atau cetak QR Code website Monggol Resik.
           </p>
         </div>
         <button
           type="button"
-          onClick={() => onNavigate('kontak')}
+          onClick={() => onNavigate('tentang')}
           className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-lg bg-emerald-800 text-white hover:bg-emerald-900 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
         >
-          <span>Buka Kontak &amp; QR</span>
+          <span>Tentang Program &amp; QR</span>
           <ArrowRight className="w-4 h-4" />
         </button>
       </div>

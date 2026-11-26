@@ -1,28 +1,37 @@
 import { useMemo, useState } from 'react';
-import { ArrowRight, BookOpen, HelpCircle, Landmark, Layers, Search, X } from 'lucide-react';
+import {
+  ArrowRight,
+  BookOpen,
+  Droplets,
+  HelpCircle,
+  Leaf,
+  Search,
+  Sprout,
+  Wrench,
+  X,
+} from 'lucide-react';
 import {
   IMAGES,
-  wasteCategories,
-  wasteItems,
+  organicWasteItems,
   type PageRoute,
-} from '../data/wasteData';
+} from '../data/bioporiData';
 import { ResilientImage } from './ResilientImage';
-import { AcceptanceIndicator, CategoryIndicator } from './CategoryIndicator';
+import { SuitabilityBadge } from './SuitabilityBadge';
 
 interface HomePageProps {
   onNavigate: (page: PageRoute) => void;
-  onSearchToCatalog: (query: string) => void;
+  onSearchOrganicWaste: (query: string) => void;
 }
 
-const quickSuggestions = ['Botol plastik', 'Kulit buah', 'Kardus', 'Baterai', 'Popok'];
+const quickSuggestions = ['Kulit pisang', 'Sayuran', 'Daun kering', 'Nasi', 'Minyak', 'Plastik'];
 
-export function HomePage({ onNavigate, onSearchToCatalog }: HomePageProps) {
+export function HomePage({ onNavigate, onSearchOrganicWaste }: HomePageProps) {
   const [quickQuery, setQuickQuery] = useState('');
 
   const quickResults = useMemo(() => {
     const trimmed = quickQuery.trim().toLowerCase();
     if (!trimmed) return [];
-    return wasteItems
+    return organicWasteItems
       .filter(
         (item) =>
           item.name.toLowerCase().includes(trimmed) ||
@@ -39,63 +48,58 @@ export function HomePage({ onNavigate, onSearchToCatalog }: HomePageProps) {
           <div className="lg:col-span-6 flex flex-col justify-center space-y-6">
             <div className="space-y-2">
               <p className="text-xs font-medium tracking-wide text-stone-500">
-                Kalurahan Monggol · Bank Sampah &amp; Edukasi Warga
+                Kalurahan Monggol · Kapanewon Saptosari · Gunungkidul
               </p>
               <h1 className="font-display text-3xl sm:text-4xl lg:text-[2.75rem] font-bold tracking-tight text-stone-900 leading-[1.15] [text-wrap:balance]">
-                Pilah Sampah dari Rumah, Jaga Kalurahan Monggol Tetap Bersih
+                Olah Sampah Organik dari Rumah dengan Biopori Galon Bekas
               </h1>
             </div>
 
             <p className="text-base sm:text-lg text-stone-600 leading-relaxed max-w-xl">
-              Monggol Resik adalah panduan digital praktis bagi warga Kalurahan Monggol untuk
-              mengenali jenis sampah rumah tangga, menyiapkan sampah bersih dari rumah, dan
-              berpartisipasi aktif di Bank Sampah setempat.
+              Monggol Resik adalah panduan digital praktis bagi masyarakat Kalurahan Monggol untuk
+              memanfaatkan lubang resapan biopori dari galon bekas, sehingga sisa dapur dan daun
+              pekarangan berubah menjadi kompos penyubur tanah.
             </p>
 
             <div className="flex flex-wrap items-center gap-3 pt-1">
               <button
                 type="button"
-                onClick={() => onNavigate('panduan')}
+                onClick={() => onNavigate('pembuatan')}
                 className="inline-flex items-center gap-2 px-5 py-3 text-sm font-semibold rounded-lg bg-emerald-800 text-white hover:bg-emerald-900 transition-colors cursor-pointer"
               >
-                <span>Mulai Panduan Memilah</span>
+                <span>Panduan Pembuatan Biopori</span>
                 <ArrowRight className="w-4 h-4" aria-hidden="true" />
               </button>
 
               <button
                 type="button"
-                onClick={() => onNavigate('bank-sampah')}
+                onClick={() => onNavigate('mengenal-biopori')}
                 className="inline-flex items-center gap-2 px-5 py-3 text-sm font-semibold rounded-lg border border-stone-300 bg-white text-stone-800 hover:bg-stone-50 transition-colors cursor-pointer"
               >
-                <span>Mengenal Bank Sampah</span>
+                <span>Mengenal Biopori</span>
               </button>
             </div>
-
-            <p className="text-xs text-stone-500 pt-2 border-t border-stone-200 max-w-lg leading-relaxed">
-              Media informasi terbuka tanpa akun atau login. Jadwal pelayanan dan harga sampah
-              dikonfirmasi langsung kepada pengelola Bank Sampah.
-            </p>
           </div>
 
           <div className="lg:col-span-6">
             <ResilientImage
               src={IMAGES.hero}
-              alt="Suasana pelayanan dan pemilahan sampah teratur di pos Bank Sampah Kalurahan Monggol"
+              alt="Lubang resapan biopori memanfaatkan galon bekas yang ditanam di pekarangan rumah Kalurahan Monggol"
               className="w-full h-64 sm:h-80 lg:h-full min-h-[320px] object-cover rounded-xl border border-stone-200"
-              caption="Ilustrasi kegiatan pemilahan kardus dan botol plastik bersih di Bank Sampah Kalurahan Monggol."
+              caption="Pemanfaatan galon bekas berlubang sebagai tabung biopori di pekarangan rumah warga."
             />
           </div>
         </div>
 
-        {/* Full-Width 4-Column Quick Navigation Strip Below Hero Split */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-10 pt-10 border-t border-stone-200">
+        {/* Full-Width Educational Navigation Strip */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-10 pt-10 border-t border-stone-200">
           <button
             type="button"
-            onClick={() => onNavigate('jenis-sampah')}
+            onClick={() => onNavigate('mengenal-biopori')}
             className="group text-left p-5 rounded-xl bg-white border border-stone-200 hover:border-emerald-700 transition-colors cursor-pointer flex flex-col justify-between gap-3"
           >
             <div className="flex items-center justify-between">
-              <Layers className="w-5 h-5 text-emerald-800" aria-hidden="true" />
+              <Droplets className="w-5 h-5 text-emerald-800" aria-hidden="true" />
               <ArrowRight
                 className="w-4 h-4 text-stone-400 group-hover:text-emerald-800 transition-transform group-hover:translate-x-0.5"
                 aria-hidden="true"
@@ -103,17 +107,61 @@ export function HomePage({ onNavigate, onSearchToCatalog }: HomePageProps) {
             </div>
             <div>
               <h2 className="font-display text-base font-semibold text-stone-900">
-                Mengenal Jenis Sampah
+                Mengenal Biopori
               </h2>
               <p className="text-xs text-stone-600 mt-1 leading-relaxed">
-                Organik, anorganik, residu, hingga B3 rumah tangga beserta kolom pencariannya.
+                Pengertian lubang resapan biopori, prinsip kerja, proses penguraian, dan manfaat kompos.
               </p>
             </div>
           </button>
 
           <button
             type="button"
-            onClick={() => onNavigate('panduan')}
+            onClick={() => onNavigate('sampah-organik')}
+            className="group text-left p-5 rounded-xl bg-white border border-stone-200 hover:border-emerald-700 transition-colors cursor-pointer flex flex-col justify-between gap-3"
+          >
+            <div className="flex items-center justify-between">
+              <Leaf className="w-5 h-5 text-emerald-800" aria-hidden="true" />
+              <ArrowRight
+                className="w-4 h-4 text-stone-400 group-hover:text-emerald-800 transition-transform group-hover:translate-x-0.5"
+                aria-hidden="true"
+              />
+            </div>
+            <div>
+              <h2 className="font-display text-base font-semibold text-stone-900">
+                Mengenal Sampah Organik
+              </h2>
+              <p className="text-xs text-stone-600 mt-1 leading-relaxed">
+                Jenis sampah yang boleh dan tidak dianjurkan masuk biopori serta cara mempersiapkannya.
+              </p>
+            </div>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => onNavigate('alat-bahan')}
+            className="group text-left p-5 rounded-xl bg-white border border-stone-200 hover:border-emerald-700 transition-colors cursor-pointer flex flex-col justify-between gap-3"
+          >
+            <div className="flex items-center justify-between">
+              <Wrench className="w-5 h-5 text-emerald-800" aria-hidden="true" />
+              <ArrowRight
+                className="w-4 h-4 text-stone-400 group-hover:text-emerald-800 transition-transform group-hover:translate-x-0.5"
+                aria-hidden="true"
+              />
+            </div>
+            <div>
+              <h2 className="font-display text-base font-semibold text-stone-900">
+                Alat &amp; Bahan
+              </h2>
+              <p className="text-xs text-stone-600 mt-1 leading-relaxed">
+                Daftar perlengkapan sederhana seperti galon bekas, pelubang galon, penggali tanah, dan pengisi.
+              </p>
+            </div>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => onNavigate('pembuatan')}
             className="group text-left p-5 rounded-xl bg-white border border-stone-200 hover:border-emerald-700 transition-colors cursor-pointer flex flex-col justify-between gap-3"
           >
             <div className="flex items-center justify-between">
@@ -125,21 +173,21 @@ export function HomePage({ onNavigate, onSearchToCatalog }: HomePageProps) {
             </div>
             <div>
               <h2 className="font-display text-base font-semibold text-stone-900">
-                Panduan Pemilahan
+                Panduan Pembuatan Biopori
               </h2>
               <p className="text-xs text-stone-600 mt-1 leading-relaxed">
-                Langkah praktis memisahkan, membersihkan, dan menyimpan sampah agar tidak tercampur.
+                Enam tahapan pembuatan mulai dari memilih lokasi, melubangi galon, hingga pengisian awal.
               </p>
             </div>
           </button>
 
           <button
             type="button"
-            onClick={() => onNavigate('bank-sampah')}
+            onClick={() => onNavigate('perawatan')}
             className="group text-left p-5 rounded-xl bg-white border border-stone-200 hover:border-emerald-700 transition-colors cursor-pointer flex flex-col justify-between gap-3"
           >
             <div className="flex items-center justify-between">
-              <Landmark className="w-5 h-5 text-emerald-800" aria-hidden="true" />
+              <Sprout className="w-5 h-5 text-emerald-800" aria-hidden="true" />
               <ArrowRight
                 className="w-4 h-4 text-stone-400 group-hover:text-emerald-800 transition-transform group-hover:translate-x-0.5"
                 aria-hidden="true"
@@ -147,10 +195,10 @@ export function HomePage({ onNavigate, onSearchToCatalog }: HomePageProps) {
             </div>
             <div>
               <h2 className="font-display text-base font-semibold text-stone-900">
-                Mengenal Bank Sampah
+                Penggunaan &amp; Perawatan
               </h2>
               <p className="text-xs text-stone-600 mt-1 leading-relaxed">
-                Cara kerja penyetoran, jenis barang yang diterima, dan syarat menjadi nasabah.
+                Cara mengisi harian, menjaga kelembapan, memantau penguraian, dan memanen kompos.
               </p>
             </div>
           </button>
@@ -169,26 +217,26 @@ export function HomePage({ onNavigate, onSearchToCatalog }: HomePageProps) {
             </div>
             <div>
               <h2 className="font-display text-base font-semibold text-stone-900">
-                FAQ &amp; Kontak
+                FAQ &amp; Tentang Program
               </h2>
               <p className="text-xs text-stone-600 mt-1 leading-relaxed">
-                Jawaban pertanyaan warga sehari-hari serta akses QR Code dan kontak pengelola.
+                Tanya jawab seputar biopori galon bekas serta dokumentasi dan QR Code program KKN.
               </p>
             </div>
           </button>
         </div>
       </section>
 
-      {/* Quick Waste Lookup Section */}
+      {/* Quick Waste Suitability Checker */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="rounded-xl bg-white border border-stone-200 p-6 sm:p-8 space-y-6">
           <div className="max-w-2xl space-y-2">
             <h2 className="font-display text-2xl sm:text-3xl font-bold text-stone-900 [text-wrap:balance]">
-              Cek Cepat Jenis Sampah Rumah Tangga
+              Cek Cepat: Bolehkah Masuk ke Biopori?
             </h2>
             <p className="text-sm sm:text-base text-stone-600 leading-relaxed">
-              Bingung sampah di rumah masuk kategori apa atau boleh disetorkan ke Bank Sampah?
-              Ketik nama benda di bawah ini untuk melihat cara penanganannya.
+              Ketik nama sisa dapur atau sampah pekarangan untuk mengetahui apakah bahan tersebut
+              aman dimasukkan ke tabung biopori galon bekas dan bagaimana cara mempersiapkannya.
             </p>
           </div>
 
@@ -202,8 +250,8 @@ export function HomePage({ onNavigate, onSearchToCatalog }: HomePageProps) {
                 type="text"
                 value={quickQuery}
                 onChange={(e) => setQuickQuery(e.target.value)}
-                placeholder="Contoh: botol plastik, kardus, kulit pisang, baterai, popok..."
-                aria-label="Cari nama sampah rumah tangga"
+                placeholder="Contoh: kulit pisang, sisa sayur, daun kering, nasi, minyak, plastik..."
+                aria-label="Cek bahan yang boleh dimasukkan ke biopori"
                 className="w-full pl-10 pr-10 py-3 text-sm rounded-lg border border-stone-300 bg-[#FAF9F6] text-stone-900 placeholder:text-stone-400 focus:outline-none focus:border-emerald-800 focus:bg-white transition-colors"
               />
               {quickQuery && (
@@ -219,7 +267,7 @@ export function HomePage({ onNavigate, onSearchToCatalog }: HomePageProps) {
             </div>
 
             <div className="flex flex-wrap items-center gap-2">
-              <span className="text-xs text-stone-500 mr-1">Coba cari:</span>
+              <span className="text-xs text-stone-500 mr-1">Contoh cepat:</span>
               {quickSuggestions.map((term) => (
                 <button
                   key={term}
@@ -238,15 +286,15 @@ export function HomePage({ onNavigate, onSearchToCatalog }: HomePageProps) {
               {quickResults.length === 0 ? (
                 <div className="py-4 text-sm text-stone-600 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                   <p>
-                    Barang &ldquo;{quickQuery}&rdquo; tidak ditemukan pada ringkasan cepat. Cek
-                    daftar lengkap atau hubungi pengelola Bank Sampah.
+                    Bahan &ldquo;{quickQuery}&rdquo; belum ditemukan pada ringkasan cepat. Buka
+                    panduan lengkap Mengenal Sampah Organik untuk melihat kriterianya.
                   </p>
                   <button
                     type="button"
-                    onClick={() => onSearchToCatalog(quickQuery)}
+                    onClick={() => onSearchOrganicWaste(quickQuery)}
                     className="inline-flex items-center gap-1.5 text-sm font-semibold text-emerald-800 hover:underline whitespace-nowrap cursor-pointer"
                   >
-                    <span>Buka Katalog Lengkap</span>
+                    <span>Buka Daftar Lengkap</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>
@@ -259,10 +307,12 @@ export function HomePage({ onNavigate, onSearchToCatalog }: HomePageProps) {
                         className="p-4 rounded-lg border border-stone-200 bg-[#FAF9F6] space-y-2.5"
                       >
                         <div className="flex flex-wrap items-center justify-between gap-2">
-                          <CategoryIndicator categoryId={item.categoryId} />
-                          <AcceptanceIndicator
-                            status={item.acceptedAtBankSampah}
-                            label={item.acceptanceLabel}
+                          <span className="text-xs font-medium text-stone-600">
+                            {item.wasteType}
+                          </span>
+                          <SuitabilityBadge
+                            suitability={item.suitability}
+                            label={item.suitabilityLabel}
                           />
                         </div>
                         <h3 className="font-display text-base font-semibold text-stone-900">
@@ -278,10 +328,10 @@ export function HomePage({ onNavigate, onSearchToCatalog }: HomePageProps) {
                   <div>
                     <button
                       type="button"
-                      onClick={() => onSearchToCatalog(quickQuery)}
+                      onClick={() => onSearchOrganicWaste(quickQuery)}
                       className="inline-flex items-center gap-1.5 text-sm font-semibold text-emerald-800 hover:underline cursor-pointer"
                     >
-                      <span>Lihat semua hasil di halaman Mengenal Jenis Sampah</span>
+                      <span>Lihat semua panduan di halaman Mengenal Sampah Organik</span>
                       <ArrowRight className="w-4 h-4" />
                     </button>
                   </div>
@@ -292,15 +342,15 @@ export function HomePage({ onNavigate, onSearchToCatalog }: HomePageProps) {
         </div>
       </section>
 
-      {/* Why Sort Waste at Home Section */}
+      {/* Household Organic Waste Problem & Biopori Solution */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="space-y-8">
           <div className="max-w-2xl space-y-2">
             <p className="text-xs font-medium tracking-wide text-stone-500">
-              Mengapa Dimulai dari Rumah?
+              Mengapa Dimulai dari Pekarangan Rumah?
             </p>
             <h2 className="font-display text-2xl sm:text-3xl font-bold text-stone-900 [text-wrap:balance]">
-              Pentingnya Pengelolaan Sampah Rumah Tangga di Kalurahan Monggol
+              Mengatasi Masalah Sampah Organik Rumah Tangga dengan Cara Sederhana
             </h2>
           </div>
 
@@ -308,69 +358,36 @@ export function HomePage({ onNavigate, onSearchToCatalog }: HomePageProps) {
             <article className="p-6 rounded-xl bg-white border border-stone-200 space-y-3">
               <p className="font-mono text-xs font-medium text-emerald-800 tabular-nums">01.</p>
               <h3 className="font-display text-lg font-semibold text-stone-900">
-                Mengurangi Kebiasaan Membakar Sampah
+                Mengurangi Bau &amp; Pembakaran Sampah
               </h3>
               <p className="text-sm text-stone-600 leading-relaxed">
-                Membakar plastik dan residu menghasilkan asap berbahaya bagi pernapasan keluarga
-                dan mencemari pekarangan. Pemilahan mengarahkan plastik bersih menuju daur ulang.
+                Sisa sayuran, kulit buah, dan guguran daun sering menumpuk, membusuk di tempat
+                sampah terbuka, atau dibakar di halaman. Biopori menampungnya secara rapi di dalam
+                tanah.
               </p>
             </article>
 
             <article className="p-6 rounded-xl bg-white border border-stone-200 space-y-3">
               <p className="font-mono text-xs font-medium text-emerald-800 tabular-nums">02.</p>
               <h3 className="font-display text-lg font-semibold text-stone-900">
-                Menjaga Nilai Guna Sampah Anorganik
+                Memanfaatkan Galon Bekas Rumah Tangga
               </h3>
               <p className="text-sm text-stone-600 leading-relaxed">
-                Botol plastik, kardus, dan kaleng yang tercampur sisa makanan basah menjadi kotor
-                dan berbau. Memilah sejak dari dapur menjaga bahan tetap bersih dan layak setor.
+                Alih-alih membeli pipa besar, galon bekas 19 liter yang diberi lubang di sisi dan
+                bawah dapat menjadi tabung biopori yang kuat, hemat biaya, dan mudah dibuat warga.
               </p>
             </article>
 
             <article className="p-6 rounded-xl bg-white border border-stone-200 space-y-3">
               <p className="font-mono text-xs font-medium text-emerald-800 tabular-nums">03.</p>
               <h3 className="font-display text-lg font-semibold text-stone-900">
-                Sisa Organik Kembali Menyuburkan Tanah
+                Menghasilkan Kompos &amp; Resapan Air
               </h3>
               <p className="text-sm text-stone-600 leading-relaxed">
-                Sisa sayuran dan dedaunan pekarangan dapat diolah menjadi kompos atau pakan ternak,
-                sehingga volume sampah yang keluar dari rumah berkurang jauh.
+                Cacing dan mikroorganisme tanah mengubah sisa dapur menjadi kompos penyubur tanaman
+                sekaligus menciptakan pori-pori alami yang membantu tanah menyerap air hujan.
               </p>
             </article>
-          </div>
-        </div>
-      </section>
-
-      {/* 4 Waste Categories Overview Strip */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="rounded-xl bg-white border border-stone-200 p-6 sm:p-8 space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-stone-200 pb-5">
-            <div className="space-y-1.5">
-              <h2 className="font-display text-2xl font-bold text-stone-900">
-                Empat Kelompok Sampah Utama
-              </h2>
-              <p className="text-sm text-stone-600">
-                Kenali perbedaannya agar tidak salah wadah saat memilah di rumah.
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={() => onNavigate('jenis-sampah')}
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-emerald-800 hover:underline whitespace-nowrap cursor-pointer"
-            >
-              <span>Pelajari Detail &amp; Cari Barang</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {wasteCategories.map((cat) => (
-              <div key={cat.id} className="space-y-2.5">
-                <CategoryIndicator categoryId={cat.id} label={cat.name} />
-                <p className="text-xs font-medium text-stone-800">{cat.subtitle}</p>
-                <p className="text-xs text-stone-600 leading-relaxed">{cat.examples[0]}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>

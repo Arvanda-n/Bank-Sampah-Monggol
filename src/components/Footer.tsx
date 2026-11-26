@@ -1,4 +1,4 @@
-import type { PageRoute } from '../data/wasteData';
+import type { PageRoute } from '../data/bioporiData';
 
 interface FooterProps {
   onNavigate: (page: PageRoute) => void;
@@ -12,17 +12,18 @@ export function Footer({ onNavigate }: FooterProps) {
           <div className="md:col-span-5 space-y-3">
             <p className="font-display text-lg font-bold text-stone-900">Monggol Resik</p>
             <p className="text-sm text-stone-600 leading-relaxed max-w-md">
-              Media edukasi dan informasi digital pengelolaan sampah rumah tangga untuk mendukung
-              kegiatan Bank Sampah Kalurahan Monggol, Kapanewon Saptosari, Kabupaten Gunungkidul.
+              Media edukasi digital pengelolaan sampah organik rumah tangga melalui pemanfaatan
+              lubang resapan biopori galon bekas untuk masyarakat Kalurahan Monggol, Kapanewon
+              Saptosari, Kabupaten Gunungkidul.
             </p>
             <p className="text-xs text-stone-500">
-              Dikembangkan melalui Program Kerja KKN Bidang Teknik Informatika · Website Edukasi Statis
+              Program Kerja KKN Bidang Teknik Informatika · Website Edukasi Statis
             </p>
           </div>
 
           <div className="md:col-span-4 space-y-3">
             <p className="text-xs font-semibold tracking-wide text-stone-500">
-              Halaman Informasi
+              Materi Edukasi Biopori
             </p>
             <ul className="grid grid-cols-2 gap-y-2 gap-x-4 text-sm">
               <li>
@@ -37,28 +38,46 @@ export function Footer({ onNavigate }: FooterProps) {
               <li>
                 <button
                   type="button"
-                  onClick={() => onNavigate('jenis-sampah')}
+                  onClick={() => onNavigate('mengenal-biopori')}
                   className="text-stone-700 hover:text-emerald-800 hover:underline cursor-pointer"
                 >
-                  Jenis Sampah
+                  Mengenal Biopori
                 </button>
               </li>
               <li>
                 <button
                   type="button"
-                  onClick={() => onNavigate('panduan')}
+                  onClick={() => onNavigate('sampah-organik')}
                   className="text-stone-700 hover:text-emerald-800 hover:underline cursor-pointer"
                 >
-                  Panduan Pemilahan
+                  Sampah Organik
                 </button>
               </li>
               <li>
                 <button
                   type="button"
-                  onClick={() => onNavigate('bank-sampah')}
+                  onClick={() => onNavigate('alat-bahan')}
                   className="text-stone-700 hover:text-emerald-800 hover:underline cursor-pointer"
                 >
-                  Mengenal Bank Sampah
+                  Alat &amp; Bahan
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onNavigate('pembuatan')}
+                  className="text-stone-700 hover:text-emerald-800 hover:underline cursor-pointer"
+                >
+                  Panduan Pembuatan
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onNavigate('perawatan')}
+                  className="text-stone-700 hover:text-emerald-800 hover:underline cursor-pointer"
+                >
+                  Perawatan &amp; Panen
                 </button>
               </li>
               <li>
@@ -73,10 +92,10 @@ export function Footer({ onNavigate }: FooterProps) {
               <li>
                 <button
                   type="button"
-                  onClick={() => onNavigate('kontak')}
+                  onClick={() => onNavigate('tentang')}
                   className="text-stone-700 hover:text-emerald-800 hover:underline cursor-pointer"
                 >
-                  Kontak &amp; QR Code
+                  Tentang Program
                 </button>
               </li>
             </ul>
@@ -84,14 +103,15 @@ export function Footer({ onNavigate }: FooterProps) {
 
           <div className="md:col-span-3 space-y-3">
             <p className="text-xs font-semibold tracking-wide text-stone-500">
-              Akses Cepat Poster
+              Poster &amp; QR Code
             </p>
             <p className="text-sm text-stone-600 leading-relaxed">
-              Unduh atau cetak QR Code website untuk dipasang pada papan informasi padukuhan.
+              Akses QR Code website untuk ditempel pada poster sosialisasi dan papan informasi
+              padukuhan.
             </p>
             <button
               type="button"
-              onClick={() => onNavigate('kontak')}
+              onClick={() => onNavigate('tentang')}
               className="inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg border border-stone-300 bg-stone-50 text-stone-800 hover:bg-stone-100 transition-colors cursor-pointer"
             >
               Buka QR Code Website
@@ -100,10 +120,8 @@ export function Footer({ onNavigate }: FooterProps) {
         </div>
 
         <div className="pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-stone-500">
-          <p>Monggol Resik · Kalurahan Monggol, Gunungkidul</p>
-          <p>
-            Jadwal layanan dan harga satuan sampah dikonfirmasi langsung kepada pengelola Bank Sampah.
-          </p>
+          <p>Monggol Resik · Kalurahan Monggol, Kapanewon Saptosari, Gunungkidul</p>
+          <p className="font-mono">https://monggol-resik.vercel.app</p>
         </div>
       </div>
     </footer>

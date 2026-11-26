@@ -1,21 +1,25 @@
 import { useEffect, useState } from 'react';
-import { BankSampahPage } from './components/BankSampahPage';
-import { ContactQrPage } from './components/ContactQrPage';
+import { AboutProgramPage } from './components/AboutProgramPage';
+import { BioporiInfoPage } from './components/BioporiInfoPage';
+import { CareUsagePage } from './components/CareUsagePage';
+import { CreationGuidePage } from './components/CreationGuidePage';
 import { FaqPage } from './components/FaqPage';
 import { Footer } from './components/Footer';
 import { HomePage } from './components/HomePage';
 import { Navbar } from './components/Navbar';
-import { SortingGuidePage } from './components/SortingGuidePage';
-import { WasteTypesPage } from './components/WasteTypesPage';
-import type { PageRoute } from './data/wasteData';
+import { OrganicWastePage } from './components/OrganicWastePage';
+import { ToolsMaterialsPage } from './components/ToolsMaterialsPage';
+import type { PageRoute } from './data/bioporiData';
 
 const validRoutes: PageRoute[] = [
   'beranda',
-  'jenis-sampah',
-  'panduan',
-  'bank-sampah',
+  'mengenal-biopori',
+  'sampah-organik',
+  'alat-bahan',
+  'pembuatan',
+  'perawatan',
   'faq',
-  'kontak',
+  'tentang',
 ];
 
 function getRouteFromHash(): PageRoute {
@@ -26,7 +30,7 @@ function getRouteFromHash(): PageRoute {
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<PageRoute>(getRouteFromHash);
-  const [catalogSearchQuery, setCatalogSearchQuery] = useState('');
+  const [organicSearchQuery, setOrganicSearchQuery] = useState('');
 
   useEffect(() => {
     const onHashChange = () => {
@@ -37,8 +41,8 @@ export default function App() {
   }, []);
 
   const navigate = (page: PageRoute) => {
-    if (page !== 'jenis-sampah') {
-      setCatalogSearchQuery('');
+    if (page !== 'sampah-organik') {
+      setOrganicSearchQuery('');
     }
     setCurrentPage(page);
     if (typeof window !== 'undefined') {
@@ -47,11 +51,11 @@ export default function App() {
     }
   };
 
-  const handleSearchToCatalog = (query: string) => {
-    setCatalogSearchQuery(query);
-    setCurrentPage('jenis-sampah');
+  const handleSearchOrganicWaste = (query: string) => {
+    setOrganicSearchQuery(query);
+    setCurrentPage('sampah-organik');
     if (typeof window !== 'undefined') {
-      window.location.hash = 'jenis-sampah';
+      window.location.hash = 'sampah-organik';
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
@@ -62,15 +66,17 @@ export default function App() {
 
       <main className="flex-1">
         {currentPage === 'beranda' && (
-          <HomePage onNavigate={navigate} onSearchToCatalog={handleSearchToCatalog} />
+          <HomePage onNavigate={navigate} onSearchOrganicWaste={handleSearchOrganicWaste} />
         )}
-        {currentPage === 'jenis-sampah' && (
-          <WasteTypesPage initialSearchQuery={catalogSearchQuery} onNavigate={navigate} />
+        {currentPage === 'mengenal-biopori' && <BioporiInfoPage onNavigate={navigate} />}
+        {currentPage === 'sampah-organik' && (
+          <OrganicWastePage initialSearchQuery={organicSearchQuery} onNavigate={navigate} />
         )}
-        {currentPage === 'panduan' && <SortingGuidePage onNavigate={navigate} />}
-        {currentPage === 'bank-sampah' && <BankSampahPage onNavigate={navigate} />}
+        {currentPage === 'alat-bahan' && <ToolsMaterialsPage onNavigate={navigate} />}
+        {currentPage === 'pembuatan' && <CreationGuidePage onNavigate={navigate} />}
+        {currentPage === 'perawatan' && <CareUsagePage onNavigate={navigate} />}
         {currentPage === 'faq' && <FaqPage onNavigate={navigate} />}
-        {currentPage === 'kontak' && <ContactQrPage />}
+        {currentPage === 'tentang' && <AboutProgramPage />}
       </main>
 
       <Footer onNavigate={navigate} />

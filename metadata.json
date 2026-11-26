@@ -1,6 +1,6 @@
 {
   "name": "Monggol Resik",
-  "description": "Media edukasi dan informasi pengelolaan sampah rumah tangga serta Bank Sampah Kalurahan Monggol.",
+  "description": "Website edukasi pengelolaan sampah organik rumah tangga melalui pemanfaatan lubang resapan biopori galon bekas di Kalurahan Monggol.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
